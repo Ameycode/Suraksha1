@@ -1,7 +1,3 @@
-<div align="center">
-  <img width="1200" height="300" alt="Suraksha Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
 # 🌸 Suraksha – Women Safety Routing App
 
 Suraksha is a **community-powered safety navigation app for women**, designed to help users find socially safe paths in urban areas using positive safety indicators instead of crime data.
