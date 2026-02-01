@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ShieldCheck, Loader2, Check, X, Camera, LogIn, UserPlus, ArrowLeft, User, Mail, Lock, Sparkles, ShieldAlert, AlertTriangle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { db, ref, set, get, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '../services/firebase';
+import { AnimatePresence, motion } from 'framer-motion';
+import { AlertTriangle, ArrowLeft, Camera, Check, Loader2, Lock, LogIn, Mail, ShieldAlert, ShieldCheck, Sparkles, User, UserPlus } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 import { generateFaceEmbedding, matchFaceEmbedding, verifyGender } from '../services/faceRecognition';
+import { auth, createUserWithEmailAndPassword, db, get, ref, set, signInWithEmailAndPassword } from '../services/firebase';
 
 interface FaceAuthProps {
   onSuccess: (profile: any) => void;
@@ -29,7 +29,7 @@ export const FaceAuth: React.FC<FaceAuthProps> = ({ onSuccess }) => {
   const timerRef = useRef<number | null>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
 
-  const LOGO_SRC = "https://img.sanishtech.com/u/f092204ed750bcf3813eaff81a4b9486.png";
+  const LOGO_SRC = "components/surakshaLogo.png";
 
   // Cleanup timer
   const clearTimer = () => {

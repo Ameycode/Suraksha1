@@ -6,6 +6,7 @@ import numpy as np
 from typing import List
 from scipy.spatial import KDTree
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
@@ -30,10 +31,13 @@ async def log_requests(request, call_next):
 async def root():
     return {"status": "PSI Engine is Running", "demo": "Suraksha Pune Safety Model"}
 
+# Get the directory where this script is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Load model, scaler and dataset
-model = joblib.load(r"C:\Users\user\Documents\Suraksha-1\suraksha_psi_model.pkl")
-scaler = joblib.load(r"C:\Users\user\Documents\Suraksha-1\scaler.pkl")
-df = pd.read_csv(r"C:\Users\user\Documents\Suraksha-1\suraksha_pune_dataset_with_coords.csv")
+model = joblib.load(os.path.join(BASE_DIR, "suraksha_psi_model.pkl"))
+scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
+df = pd.read_csv(os.path.join(BASE_DIR, "suraksha_pune_dataset_with_coords.csv"))
     
 # Create a KDTree for fast spatial lookup
 coords = df[['lat', 'lng']].values

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Map, Camera, Users, AlertCircle, Menu, User as UserIcon, ShieldAlert, X, Navigation, LogIn, MapPin, LogOut, ShieldCheck, AlertTriangle, Info, Mail, Lock, Phone, MessageSquarePlus, HeartPulse, CheckCircle, Share2, Copy, PhoneCall, Star, Sparkles, Video, Scan, Crosshair, Loader2, Zap } from 'lucide-react';
-import { MapVisualization } from './components/MapVisualization';
-import { SafetyScanner } from './components/SafetyScanner';
+import { AlertCircle, AlertTriangle, Camera, HeartPulse, LogOut, Map, MapPin, MessageSquarePlus, Navigation, PhoneCall, ShieldAlert, ShieldCheck, Users, X, Zap } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CoTravel } from './components/CoTravel';
+import { FaceAuth } from './components/FaceAuth';
+import { MapVisualization } from './components/MapVisualization';
 import { RoutePlanner } from './components/RoutePlanner';
 import { SafetyFeedback } from './components/SafetyFeedback';
-import { FaceAuth } from './components/FaceAuth';
-import { SafetyCategory, AppMode, SafetyNode, ActiveRoute, CoTraveller } from './types';
-import { db, ref, onValue, set, get, push, auth } from './services/firebase';
+import { SafetyScanner } from './components/SafetyScanner';
+import { auth, db, get, onValue, push, ref, set } from './services/firebase';
+import { ActiveRoute, AppMode, CoTraveller, SafetyCategory, SafetyNode } from './types';
 
 // Helper to generate dynamic safety nodes around a location
 const generateNodesAround = (center: { lat: number, lng: number }): SafetyNode[] => {
@@ -63,7 +63,7 @@ function App() {
   const [logoError, setLogoError] = useState(false);
 
   const POLICE_HELPLINE = "18001200020";
-  const LOGO_SRC = "https://img.sanishtech.com/u/f092204ed750bcf3813eaff81a4b9486.png";
+  const LOGO_SRC = "components/surakshaLogo.png";
 
   useEffect(() => {
     const checkSession = async () => {
