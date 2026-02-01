@@ -1,8 +1,32 @@
 services:
+  # React Frontend
+  - type: static
+    name: suraksha-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist  # Change to ./build if using create-react-app
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL  # Or REACT_APP_API_URL for CRA
+        value: https://suraksha-backend-i3ur.onrender.com  # Will be your backend URL
+
+  # Python Backend (FastAPI/Flask)
   - type: web
     name: suraksha-backend
     env: python
     plan: free
     pythonVersion: 3.10.13
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn main:app -k uvicorn.workers.UvicornWorker
+    startCommand: gunicorn main:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
+      - key: PORT
+        value: 10000
+      # Add your other environment variables here
+      # - key: DATABASE_URL
+      #   sync: false
+      # - key: SECRET_KEY
+      #   generateValue: true
