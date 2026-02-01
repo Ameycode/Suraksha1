@@ -4,7 +4,7 @@ import joblib
 import pandas as pd
 import numpy as np
 from typing import List
-from scipy.spatial import KDTree
+from sklearn.neighbors import BallTree
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
@@ -39,9 +39,9 @@ model = joblib.load(os.path.join(BASE_DIR, "suraksha_psi_model.pkl"))
 scaler = joblib.load(os.path.join(BASE_DIR, "scaler.pkl"))
 df = pd.read_csv(os.path.join(BASE_DIR, "suraksha_pune_dataset_with_coords.csv"))
     
-# Create a KDTree for fast spatial lookup
+# Create a BallTree for fast spatial lookup (sklearn alternative to scipy's KDTree)
 coords = df[['lat', 'lng']].values
-tree = KDTree(coords)
+tree = BallTree(coords, metric='euclidean')
 
 class SafetyFeatures(BaseModel):
     crime_rate: float
